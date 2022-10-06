@@ -2,39 +2,49 @@
   <v-app>
     <v-app-bar
       app
-      color="primary"
+      color="light-blue"
       dark
+      dense
+    > 
+    <v-spacer></v-spacer> 
+    <!-- FIXME: EL icono no cambia cuando se da click fuera del boton  -->
+    <v-menu
+      transition="slide-y-transition"
+      bottom
+      offset-y
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          color="black"
+          text
+          plain
+          class="font-weight-bold"
+          v-bind="attrs"
+          v-on="on"
+          @click="changeIcon"
+        >
+          Secciones
+          <v-icon>mdi-menu-{{ down ? 'down' : 'up'}}</v-icon>
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+        >
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>  
+    <v-btn
+      color="black"
+      text
+      plain
+      class="font-weight-bold"
+    >
+      <v-icon class="pr-2">mdi-account-lock</v-icon>
+      Administrar
+    </v-btn> 
     </v-app-bar>
 
     <v-main>
@@ -49,7 +59,16 @@ export default {
   name: 'App',
 
   data: () => ({
-    //
+    items: [
+        { title: 'ARMAS' },
+        { title: 'CIENCIAS NATURALES' },
+      ],
+      down: true,
   }),
+  methods: {
+    changeIcon() {
+      this.down = !this.down;
+    }
+  }
 };
 </script>
