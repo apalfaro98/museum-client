@@ -31,8 +31,23 @@ const getEstadistica = async () => {
     return data;
 };
 
+const getArmas = async () => {
+    const resp = await axios.get('/armas');
+    const data = resp.data;
+    return data;
+};
+
+const getNaturales = async () => {
+    const resp = await axios.get('/naturales');
+    const data = resp.data;
+    return data;
+};
+
 export default {
     auth,
     checkLogued,
     getEstadistica,
+    getArmas,
+    getEstadistica,
+    getNaturales,
 };
