@@ -9,308 +9,174 @@
         <template v-slot:top>
             <v-dialog v-model="dialog" max-width="1000">
                 <v-card class="pt-4">
-                    <v-card-text>
-                        <v-container>
-                            <v-row>
-                                <v-col cols="12" md="6">
-                                    <v-img
-                                        :src="`http://localhost:3000/images/${editedItem.imageUrl}`"
-                                    ></v-img>
-                                </v-col>
-                                <v-col cols="12" md="6">
-                                    <p class="text-subtitle-1">
-                                        <span class="font-weight-bold"
-                                            >INST/PROPIETARIO:
-                                        </span>
-                                        {{ editedItem.propietario }}
-                                    </p>
-                                    <p class="text-subtitle-1">
-                                        <span class="font-weight-bold"
-                                            >CODIGO:
-                                        </span>
-                                        {{ editedItem.codigo }}
-                                    </p>
-                                    <p class="text-subtitle-1">
-                                        <span class="font-weight-bold"
-                                            >NO.INVENTARIO:
-                                        </span>
-                                        {{ editedItem.noInventario }}
-                                    </p>
-                                </v-col>
-                            </v-row>
-                            <v-row>
-                                <v-col cols="12" md="6">
-                                    <p class="text-subtitle-1">
-                                        <span class="font-weight-bold"
-                                            >CANTIDAD:
-                                        </span>
-                                        {{ editedItem.cantidad }}
-                                    </p>
-                                    <p class="text-subtitle-1">
-                                        <span class="font-weight-bold"
-                                            >REGISTRO DE ENTRADA:
-                                        </span>
-                                        {{ editedItem.registroEntrada }}
-                                    </p>
-                                    <p class="text-subtitle-1">
-                                        <span class="font-weight-bold"
-                                            >MANIFESTACIÓN:
-                                        </span>
-                                        {{ editedItem.manifestacion }}
-                                    </p>
-                                    <p class="text-subtitle-1">
-                                        <span class="font-weight-bold"
-                                            >DENOMINACIÓN:
-                                        </span>
-                                        {{ editedItem.denominacion }}
-                                    </p>
-                                    <p class="text-subtitle-1">
-                                        <span class="font-weight-bold"
-                                            >FÁBRICA:
-                                        </span>
-                                        {{
-                                            editedItem.fabrica
-                                                ? editedItem.fabrica
-                                                : ' --- '
-                                        }}
-                                    </p>
-                                    <p class="text-subtitle-1">
-                                        <span class="font-weight-bold"
-                                            >NO. DE SERIE:
-                                        </span>
-                                        {{
-                                            editedItem.noSerie
-                                                ? editedItem.noSerie
-                                                : ' --- '
-                                        }}
-                                    </p>
-                                    <p class="text-subtitle-1">
-                                        <span class="font-weight-bold"
-                                            >CIUDAD Y PAÍS:
-                                        </span>
-                                        {{
-                                            editedItem.ciudadPais
-                                                ? editedItem.ciudadPais
-                                                : ' --- '
-                                        }}
-                                    </p>
-                                    <p class="text-subtitle-1">
-                                        <span class="font-weight-bold"
-                                            >AÑO:
-                                        </span>
-                                        {{
-                                            editedItem.anio
-                                                ? editedItem.anio
-                                                : ' --- '
-                                        }}
-                                    </p>
-                                    <p class="text-subtitle-1">
-                                        <span class="font-weight-bold"
-                                            >ÉPOCA:
-                                        </span>
-                                        {{ editedItem.epoca }}
-                                    </p>
-                                    <p class="text-subtitle-1">
-                                        <span class="font-weight-bold"
-                                            >ALTO:
-                                        </span>
-                                        {{ editedItem.alto }}
-                                    </p>
-                                    <p class="text-subtitle-1">
-                                        <span class="font-weight-bold"
-                                            >ANCHO:
-                                        </span>
-                                        {{ editedItem.ancho }}
-                                    </p>
-                                    <p class="text-subtitle-1">
-                                        <span class="font-weight-bold"
-                                            >PROFUNDIDAD:
-                                        </span>
-                                        {{ editedItem.profundidad }}
-                                    </p>
-                                    <p class="text-subtitle-1">
-                                        <span class="font-weight-bold"
-                                            >CALIBRE:
-                                        </span>
-                                        {{
-                                            editedItem.calibre
-                                                ? editedItem.calibre
-                                                : ' --- '
-                                        }}
-                                    </p>
-                                    <p class="text-subtitle-1">
-                                        <span class="font-weight-bold"
-                                            >MATERIALES:
-                                        </span>
-                                        {{ editedItem.materiales }}
-                                    </p>
-                                    <v-list
-                                        class="text-subtitle-1 grey--text text--darken-1 pt-0"
-                                    >
-                                        <span class="font-weight-bold"
-                                            >DESCRIPTORES:
-                                        </span>
-                                        <v-list-item
-                                            class="grey--text text--darken-1 mr-1"
-                                        >
-                                            <span class="font-weight-bold"
-                                                >1. (MAR/MOD):
-                                            </span>
-                                            {{
-                                                editedItem.mar
-                                                    ? editedItem.mar
-                                                    : ' --- '
-                                            }}
-                                        </v-list-item>
-                                        <v-list-item
-                                            class="grey--text text--darken-1"
-                                        >
-                                            <span class="font-weight-bold mr-1"
-                                                >2. (ANX):
-                                            </span>
-                                            {{
-                                                editedItem.anx
-                                                    ? editedItem.anx
-                                                    : ' --- '
-                                            }}
-                                        </v-list-item>
-                                        <v-list-item
-                                            class="grey--text text--darken-1"
-                                        >
-                                            <span class="font-weight-bold mr-1"
-                                                >3. (SIS):
-                                            </span>
-                                            {{
-                                                editedItem.sis
-                                                    ? editedItem.sis
-                                                    : ' --- '
-                                            }}
-                                        </v-list-item>
-                                        <v-list-item
-                                            class="grey--text text--darken-1"
-                                        >
-                                            <span class="font-weight-bold mr-1"
-                                                >4. (DEC):
-                                            </span>
-                                            {{
-                                                editedItem.dec
-                                                    ? editedItem.dec
-                                                    : ' --- '
-                                            }}
-                                        </v-list-item>
-                                    </v-list>
-                                </v-col>
-                                <v-col cols="12" md="6">
-                                    <p class="text-subtitle-1">
-                                        <span class="font-weight-bold"
-                                            >UBICACIÓN:
-                                        </span>
-                                        {{ editedItem.ubicacion }}
-                                    </p>
-                                    <v-list
-                                        class="text-subtitle-1 grey--text text--darken-1 pt-0"
-                                    >
-                                        <span class="font-weight-bold"
-                                            >TIPO DE REPRODUCCIÓN:
-                                        </span>
-                                        <v-list-item
-                                            class="grey--text text--darken-1"
-                                        >
-                                            <span class="font-weight-bold mr-1"
-                                                >ESTADO:
-                                            </span>
-                                            {{ editedItem.estado }}
-                                        </v-list-item>
-                                        <v-list-item
-                                            class="grey--text text--darken-1"
-                                        >
-                                            <span class="font-weight-bold mr-1"
-                                                >VALOR:
-                                            </span>
-                                            {{ editedItem.valor }}
-                                        </v-list-item>
-                                        <v-list-item
-                                            class="grey--text text--darken-1"
-                                        >
-                                            <span class="font-weight-bold mr-1">
-                                                GRADO DE VALOR:
-                                            </span>
-                                            {{ editedItem.gradoDeValor }}
-                                        </v-list-item>
-                                        <v-list-item
-                                            class="grey--text text--darken-1"
-                                        >
-                                            <span class="font-weight-bold"
-                                                >ORIGEN:
-                                            </span>
-                                            {{ editedItem.origen }}
-                                        </v-list-item>
-                                    </v-list>
-                                    <v-list
-                                        class="text-subtitle-1 grey--text text--darken-1 pt-0"
-                                    >
-                                        <span class="font-weight-bold"
-                                            >RELACIONADO CON:
-                                        </span>
-                                        <v-list-item
-                                            class="grey--text text--darken-1"
-                                        >
-                                            <span class="font-weight-bold mr-1"
-                                                >PERSONALIDAD:
-                                            </span>
-                                            {{
-                                                editedItem.personalidad
-                                                    ? editedItem.personalidad
-                                                    : '---'
-                                            }}
-                                        </v-list-item>
-                                        <v-list-item
-                                            class="grey--text text--darken-1"
-                                        >
-                                            <span class="font-weight-bold mr-1"
-                                                >ACONTECIMIENTO:
-                                            </span>
-                                            {{
-                                                editedItem.acontecimiento
-                                                    ? editedItem.acontecimiento
-                                                    : '---'
-                                            }}
-                                        </v-list-item>
-                                        <v-list-item
-                                            class="grey--text text--darken-1"
-                                        >
-                                            <span class="font-weight-bold mr-1">
-                                                TASACIÓN:
-                                            </span>
-                                            {{
-                                                editedItem.tasacion
-                                                    ? editedItem.tasacion
-                                                    : '---'
-                                            }}
-                                        </v-list-item>
-                                        <v-list-item
-                                            class="grey--text text--darken-1"
-                                        >
-                                            <span class="font-weight-bold mr-1"
-                                                >EXPEDIENTE CIENTÍFICO:
-                                            </span>
-                                            {{ editedItem.expediente }}
-                                        </v-list-item>
-                                    </v-list>
-                                    <p class="text-subtitle-1">
-                                        <span class="font-weight-bold"
-                                            >NOTAS:
-                                        </span>
-                                        {{
-                                            editedItem.notas
-                                                ? editedItem.notas
-                                                : '---'
-                                        }}
-                                    </p>
-                                </v-col>
-                            </v-row>
-                        </v-container>
-                    </v-card-text>
+                    <v-container>
+                        <v-row>
+                            <v-col cols="12" md="6">
+                                <v-img
+                                    :src="`http://localhost:3000/images/${editedItem.imageUrl}`"
+                                ></v-img>
+                            </v-col>
+                            <v-col cols="12" md="6">
+                                <property-element
+                                    :items="[
+                                        {
+                                            title: 'INST/PROPIETARIO',
+                                            value: editedItem.propietario,
+                                        },
+                                        {
+                                            title: 'CODIGO',
+                                            value: editedItem.codigo,
+                                        },
+                                        {
+                                            title: 'NO.INVENTARIO',
+                                            value: editedItem.noInventario,
+                                        },
+                                    ]"
+                                />
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="12" md="6">
+                                <property-element
+                                    :items="[
+                                        {
+                                            title: 'CANTIDAD',
+                                            value: editedItem.cantidad,
+                                        },
+                                        {
+                                            title: 'REGISTRO DE ENTRADA',
+                                            value: editedItem.registroEntrada,
+                                        },
+                                        {
+                                            title: 'DENOMINACIÓN',
+                                            value: editedItem.denominacion,
+                                        },
+                                        {
+                                            title: 'FÁBRICA',
+                                            value: editedItem.fabrica,
+                                        },
+                                        {
+                                            title: 'NO. DE SERIE',
+                                            value: editedItem.noSerie,
+                                        },
+                                        {
+                                            title: 'CIUDAD Y PAÍS',
+                                            value: editedItem.ciudadPais,
+                                        },
+                                        {
+                                            title: 'AÑO',
+                                            value: editedItem.anio,
+                                        },
+                                        {
+                                            title: 'ÉPOCA',
+                                            value: editedItem.epoca,
+                                        },
+                                        {
+                                            title: 'ALTO',
+                                            value: editedItem.alto,
+                                        },
+                                        {
+                                            title: 'ANCHO',
+                                            value: editedItem.ancho,
+                                        },
+                                        {
+                                            title: 'PROFUNDIDAD',
+                                            value: editedItem.profundidad,
+                                        },
+                                        {
+                                            title: 'CALIBRE',
+                                            value: editedItem.calibre,
+                                        },
+                                        {
+                                            title: 'MATERIALES',
+                                            value: editedItem.materiales,
+                                        },
+                                    ]"
+                                />
+                                <list-element
+                                    :title="'DESCRIPTORES'"
+                                    :list="[
+                                        {
+                                            title: '1. (MAR/MOD)',
+                                            value: editedItem.mar,
+                                        },
+                                        {
+                                            title: '2. (ANX)',
+                                            value: editedItem.anx,
+                                        },
+                                        {
+                                            title: '3. (SIS)',
+                                            value: editedItem.sis,
+                                        },
+                                        {
+                                            title: '4. (DEC)',
+                                            value: editedItem.dec,
+                                        },
+                                    ]"
+                                />
+                            </v-col>
+                            <v-col cols="12" md="6">
+                                <property-element
+                                    :items="[
+                                        {
+                                            title: 'UBICACIÓN',
+                                            value: editedItem.ubicacion,
+                                        },
+                                    ]"
+                                />
+                                <list-element
+                                    :title="'TIPO DE REPRODUCCIÓN'"
+                                    :list="[
+                                        {
+                                            title: 'ESTADO',
+                                            value: editedItem.estado,
+                                        },
+                                        {
+                                            title: 'VALOR',
+                                            value: editedItem.valor,
+                                        },
+                                        {
+                                            title: 'GRADO DE VALOR',
+                                            value: editedItem.gradoDeValor,
+                                        },
+                                        {
+                                            title: 'ORIGEN',
+                                            value: editedItem.origen,
+                                        },
+                                    ]"
+                                />
+                                <list-element
+                                    :title="'RELACIONADO CON'"
+                                    :list="[
+                                        {
+                                            title: 'PERSONALIDAD',
+                                            value: editedItem.personalidad,
+                                        },
+                                        {
+                                            title: 'ACONTECIMIENTO',
+                                            value: editedItem.acontecimiento,
+                                        },
+                                        {
+                                            title: 'TASACIÓN',
+                                            value: editedItem.tasacion,
+                                        },
+                                        {
+                                            title: 'EXPEDIENTE CIENTÍFICO',
+                                            value: editedItem.expediente,
+                                        },
+                                    ]"
+                                />
+                                <property-element
+                                    :items="[
+                                        {
+                                            title: 'NOTAS',
+                                            value: editedItem.notas,
+                                        },
+                                    ]"
+                                />
+                            </v-col>
+                        </v-row>
+                    </v-container>
 
                     <v-card-actions>
                         <v-spacer></v-spacer>
@@ -331,6 +197,8 @@
 
 <script>
 import requests from '@/helpers/requests';
+import PropertyElement from '@/components/PropertyElement.vue';
+import ListElement from '@/components/ListElement.vue';
 export default {
     data() {
         return {
@@ -382,6 +250,7 @@ export default {
             ],
         };
     },
+    components: { PropertyElement, ListElement },
     mounted() {
         this.requestData(this.section);
     },
@@ -394,7 +263,6 @@ export default {
                     this.datos.forEach((el) => {
                         el.registroEntrada = el.registroEntrada.slice(0, 10);
                     });
-                    console.log(data);
                 })
                 .catch((err) => console.log);
         },

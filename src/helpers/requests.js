@@ -43,6 +43,12 @@ const getNaturales = async () => {
     return data;
 };
 
+const getPrestamos = async () => {
+    const resp = await axios.get('/prestamos');
+    const data = resp.data;
+    return data;
+};
+
 export default {
     auth,
     checkLogued,
@@ -50,4 +56,5 @@ export default {
     getArmas,
     getEstadistica,
     getNaturales,
+    getPrestamos,
 };
