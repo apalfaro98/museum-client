@@ -28,6 +28,7 @@
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
+
                 <v-dialog v-model="dialog" max-width="500px">
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn
@@ -40,59 +41,12 @@
                             Registrar Arma
                         </v-btn>
                     </template>
-                    <v-card>
-                        <v-card-title>
-                            <span class="text-h5">{{ formTitle }}</span>
-                        </v-card-title>
-
-                        <v-card-text>
-                            <v-container>
-                                <v-row>
-                                    <v-col cols="12" sm="6" md="4">
-                                        <v-text-field
-                                            v-model="editedItem.name"
-                                            label="Dessert name"
-                                        ></v-text-field>
-                                    </v-col>
-                                    <v-col cols="12" sm="6" md="4">
-                                        <v-text-field
-                                            v-model="editedItem.calories"
-                                            label="Calories"
-                                        ></v-text-field>
-                                    </v-col>
-                                    <v-col cols="12" sm="6" md="4">
-                                        <v-text-field
-                                            v-model="editedItem.fat"
-                                            label="Fat (g)"
-                                        ></v-text-field>
-                                    </v-col>
-                                    <v-col cols="12" sm="6" md="4">
-                                        <v-text-field
-                                            v-model="editedItem.carbs"
-                                            label="Carbs (g)"
-                                        ></v-text-field>
-                                    </v-col>
-                                    <v-col cols="12" sm="6" md="4">
-                                        <v-text-field
-                                            v-model="editedItem.protein"
-                                            label="Protein (g)"
-                                        ></v-text-field>
-                                    </v-col>
-                                </v-row>
-                            </v-container>
-                        </v-card-text>
-
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="blue darken-1" text @click="close">
-                                Cancel
-                            </v-btn>
-                            <v-btn color="blue darken-1" text @click="save">
-                                Save
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
+                    <arma-create-edit
+                        :formTitle="formTitle"
+                        :editedItem="editedItem"
+                    />
                 </v-dialog>
+
                 <v-dialog v-model="dialogDelete" max-width="500px">
                     <v-card>
                         <v-card-title class="text-h5"
@@ -136,6 +90,7 @@
 <script>
 import requests from '@/helpers/requests';
 import ArmaDialog from '@/components/ArmaDialog.vue';
+import ArmaCreateEdit from '@/components/ArmaCreateEdit.vue';
 export default {
     data: () => ({
         datos: [],
@@ -186,11 +141,36 @@ export default {
         desserts: [],
         editedIndex: -1,
         editedItem: {
-            name: '',
-            calories: 0,
-            fat: 0,
-            carbs: 0,
-            protein: 0,
+            propietario: '',
+            codigo: '',
+            noInventario: '',
+            cantidad: 0,
+            manifestacion: '',
+            denominacion: '',
+            fabrica: '',
+            noSerie: '',
+            ciudadPais: '',
+            anio: '',
+            epoca: '',
+            alto: '',
+            ancho: '',
+            profundidad: '',
+            calibre: '',
+            materiales: '',
+            mar: '',
+            anx: '',
+            sis: '',
+            dec: '',
+            ubicacion: '',
+            estado: '',
+            valor: '',
+            gradoDeValor: '',
+            origen: '',
+            personalidad: '',
+            acontecimiento: '',
+            tasacion: '',
+            expediente: '',
+            notas: '',
         },
         infoItem: {},
         defaultItem: {
@@ -201,7 +181,7 @@ export default {
             protein: 0,
         },
     }),
-    components: { ArmaDialog },
+    components: { ArmaDialog, ArmaCreateEdit },
 
     computed: {
         formTitle() {
@@ -268,7 +248,7 @@ export default {
         closeInfo() {
             this.dialogInfo = false;
             this.$nextTick(() => {
-                this.infoItem = Object.assign({}, this.defaultItem);
+                this.infoItem = Object.assign({});
                 this.editedIndex = -1;
             });
         },
