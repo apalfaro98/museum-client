@@ -86,7 +86,7 @@ export default {
     },
     components: { NaturalDialog },
     mounted() {
-        this.requestData(this.section);
+        this.requestData();
     },
     methods: {
         requestData() {
