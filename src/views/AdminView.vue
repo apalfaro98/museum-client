@@ -59,7 +59,7 @@
             </v-navigation-drawer>
         </v-card>
         <div class="ml-16">
-            <estadistica-admin v-if="selectedItem === 0" />
+            <home-view v-if="selectedItem === 0" class="ml-n3" />
             <prestamos-admin v-else-if="selectedItem === 1" />
             <armas-admin v-if="selectedSection === 0" />
             <naturales-admin v-else-if="selectedSection === 1" />
@@ -68,13 +68,13 @@
 </template>
 
 <script>
-import EstadisticaAdmin from '@/components/EstadisticaAdmin.vue';
+import HomeView from '@/views/HomeView.vue';
 import PrestamosAdmin from '@/components/PrestamosAdmin.vue';
 import ArmasAdmin from '@/components/ArmasAdmin.vue';
 import NaturalesAdmin from '@/components/NaturalesAdmin.vue';
 export default {
     components: {
-        EstadisticaAdmin,
+        HomeView,
         PrestamosAdmin,
         ArmasAdmin,
         NaturalesAdmin,
