@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import requests from './helpers/requests';
 export default {
     name: 'App',
 
@@ -76,6 +77,48 @@ export default {
         changeIcon() {
             this.down = !this.down;
         },
+        logout() {
+            this.$router.push('/login');
+            this.$store.commit('logout');
+            localStorage.removeItem('username');
+            localStorage.removeItem('token');
+        },
+    },
+    created() {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            this.$store.commit('logout');
+            localStorage.removeItem('name');
+            if (this.$route.name === 'admin') {
+                this.$router.push('/login');
+            }
+        } else {
+            requests
+                .checkLogued(token)
+                .then((data) => {
+                    console.log(data);
+                    if (data.logued) {
+                        localStorage.setItem('name', data.name);
+                        this.$store.commit('login', {
+                            name: data.name,
+                            token,
+                        });
+                        console.log(this.$route.name);
+                        if (this.$route.name != 'admin') {
+                            this.$router.push('/admin');
+                        }
+                        console.log('Entro');
+                    } else {
+                        this.logout();
+                    }
+                })
+                .catch(() => {
+                    if (this.$route.name === 'admin') {
+                        this.$router.push('/login');
+                    }
+                });
+        }
     },
 };
 </script>

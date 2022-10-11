@@ -49,6 +49,12 @@ const getPrestamos = async () => {
     return data;
 };
 
+const getOnePrestamo = async (id) => {
+    const resp = await axios.get(`/prestamos/${id}`);
+    const data = resp.data;
+    return data;
+};
+
 export default {
     auth,
     checkLogued,
@@ -57,4 +63,5 @@ export default {
     getEstadistica,
     getNaturales,
     getPrestamos,
+    getOnePrestamo,
 };
