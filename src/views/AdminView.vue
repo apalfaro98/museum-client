@@ -44,22 +44,22 @@
                                 link
                                 @click="selectedItem = -1"
                             >
+                                <v-list-item-icon>
+                                    <v-icon v-text="item.icon"></v-icon>
+                                </v-list-item-icon>
                                 <v-list-item-content>
                                     <v-list-item-title
                                         v-text="item.text"
                                     ></v-list-item-title>
                                 </v-list-item-content>
-                                <v-list-item-icon>
-                                    <v-icon v-text="item.icon"></v-icon>
-                                </v-list-item-icon>
                             </v-list-item>
                         </v-list-item-group>
                     </v-list-group>
                 </v-list>
             </v-navigation-drawer>
         </v-card>
-        <div class="ml-16">
-            <home-view v-if="selectedItem === 0" class="ml-n3" />
+        <div class="ml-14">
+            <home-view v-if="selectedItem === 0" />
             <prestamos-admin v-else-if="selectedItem === 1" />
             <armas-admin v-if="selectedSection === 0" />
             <naturales-admin v-else-if="selectedSection === 1" />
