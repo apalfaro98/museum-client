@@ -6,6 +6,18 @@
 
         <v-card-text>
             <v-container>
+                <v-slide-x-transition>
+                    <v-alert
+                        v-if="error"
+                        dense
+                        text
+                        outlined
+                        type="error"
+                        class="mb-6"
+                    >
+                        {{ error }}
+                    </v-alert>
+                </v-slide-x-transition>
                 <v-row>
                     <v-col cols="12" sm="6">
                         <v-text-field
@@ -20,27 +32,33 @@
                             label="CODIGO"
                             outlined
                             :disabled="!isNew"
+                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.noInventario"
                             label="NO.INVENTARIO"
                             outlined
                             :disabled="!isNew"
+                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.cantidad"
                             label="CANTIDAD"
                             outlined
+                            :rules="[rules.required]"
+                            type="number"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.manifestacion"
                             label="MANIFESTACIÓN"
                             outlined
+                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.denominacion"
                             label="DENOMINACIÓN"
                             outlined
+                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.fabrica"
@@ -66,21 +84,25 @@
                             v-model="editedItem.epoca"
                             label="ÉPOCA"
                             outlined
+                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.alto"
                             label="ALTO"
                             outlined
+                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.ancho"
                             label="ANCHO"
                             outlined
+                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.profundidad"
                             label="PROFUNDIDAD"
                             outlined
+                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.calibre"
@@ -91,6 +113,7 @@
                             v-model="editedItem.materiales"
                             label="MATERIALES"
                             outlined
+                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-file-input
                             v-model="image"
@@ -101,6 +124,7 @@
                             prepend-inner-icon="mdi-camera"
                             prepend-icon=""
                             :disabled="!isNew"
+                            :rules="[rules.required]"
                         ></v-file-input>
                     </v-col>
                     <v-col cols="12" sm="6">
@@ -129,6 +153,7 @@
                             v-model="editedItem.ubicacion"
                             label="UBICACIÓN"
                             outlined
+                            :rules="[rules.required]"
                         ></v-text-field>
                         <span>TIPO DE REPRODUCCIÓN:</span>
                         <v-text-field
@@ -136,6 +161,7 @@
                             label="ESTADO"
                             outlined
                             class="mt-1"
+                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.valor"
@@ -146,11 +172,13 @@
                             v-model="editedItem.gradoDeValor"
                             label="GRADO DE VALOR"
                             outlined
+                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.origen"
                             label="ORIGEN"
                             outlined
+                            :rules="[rules.required]"
                         ></v-text-field>
                         <span>RELACIONADO CON:</span>
                         <v-text-field
@@ -172,6 +200,7 @@
                             v-model="editedItem.expediente"
                             label="EXPEDIENTE"
                             outlined
+                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-textarea
                             outlined
@@ -199,6 +228,11 @@ export default {
     data() {
         return {
             image: undefined,
+            error: '',
+            show: false,
+            rules: {
+                required: (value) => !!value || 'Requerido.',
+            },
         };
     },
     props: {
@@ -207,6 +241,16 @@ export default {
         isNew: Boolean,
     },
     methods: {
+        showErrors(err) {
+            if (err.response.status === 400) {
+                this.error = err.response.data.errors[0].msg;
+            } else if (err.response.status === 401) {
+                this.error = err.response.data.error.msg;
+            } else {
+                this.error =
+                    'No se pudo establecer la conexión con el servidor.';
+            }
+        },
         save() {
             if (this.isNew) {
                 requests
@@ -216,9 +260,7 @@ export default {
                         this.$emit('close');
                         this.$emit('reload');
                     })
-                    .catch((err) => {
-                        console.log(err.response);
-                    });
+                    .catch(this.showErrors);
             } else {
                 requests
                     .updateArma(this.editedItem)
@@ -227,9 +269,7 @@ export default {
                         this.$emit('close');
                         this.$emit('reload');
                     })
-                    .catch((err) => {
-                        console.log(err.response);
-                    });
+                    .catch(this.showErrors);
             }
         },
     },

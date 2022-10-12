@@ -83,6 +83,8 @@
                             label="LOTE"
                             outlined
                         ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6">
                         <span>ORIGINAL:</span>
                         <v-text-field
                             v-model="editedItem.alto"
@@ -109,8 +111,6 @@
                             prepend-icon=""
                             :disabled="!isNew"
                         ></v-file-input>
-                    </v-col>
-                    <v-col cols="12" sm="6">
                         <v-text-field
                             v-model="editedItem.ubicacion"
                             label="UBICACIÓN"
@@ -179,7 +179,7 @@ export default {
         save() {
             if (this.isNew) {
                 requests
-                    .createArma(this.editedItem, this.image)
+                    .createNatural(this.editedItem, this.image)
                     .then((data) => {
                         console.log(data);
                         this.$emit('close');
@@ -190,7 +190,7 @@ export default {
                     });
             } else {
                 requests
-                    .updateArma(this.editedItem)
+                    .updateNatural(this.editedItem)
                     .then((data) => {
                         console.log(data);
                         this.$emit('close');

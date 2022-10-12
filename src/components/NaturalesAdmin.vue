@@ -36,6 +36,7 @@
                             class="mb-2"
                             v-bind="attrs"
                             v-on="on"
+                            @click="isNew = true"
                         >
                             Registrar Artículo
                         </v-btn>
