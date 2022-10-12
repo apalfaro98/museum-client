@@ -38,35 +38,52 @@
                             outlined
                         ></v-text-field>
                         <v-text-field
-                            v-model="editedItem.denominacion"
-                            label="DENOMINACIÓN"
+                            v-model="editedItem.categoria"
+                            label="CATEGORIA CLASIFICATORIA"
                             outlined
                         ></v-text-field>
                         <v-text-field
-                            v-model="editedItem.fabrica"
-                            label="FÁBRICA"
+                            v-model="editedItem.comun"
+                            label="NOMBRE COMUN"
                             outlined
                         ></v-text-field>
                         <v-text-field
-                            v-model="editedItem.noSerie"
-                            label="NO. DE SERIE"
+                            v-model="editedItem.tecnico"
+                            label="NOMBRE TECNICO"
                             outlined
                         ></v-text-field>
                         <v-text-field
-                            v-model="editedItem.ciudadPais"
-                            label="CIUDAD Y PAÍS"
+                            v-model="editedItem.locColecta"
+                            label="LOC. DE COLECTA"
                             outlined
                         ></v-text-field>
                         <v-text-field
-                            v-model="editedItem.anio"
-                            label="AÑO"
+                            v-model="editedItem.pais"
+                            label="PAIS"
                             outlined
                         ></v-text-field>
                         <v-text-field
-                            v-model="editedItem.epoca"
-                            label="ÉPOCA"
+                            v-model="editedItem.fechaColecta"
+                            label="FECHA DE COLECTA"
                             outlined
                         ></v-text-field>
+                        <v-text-field
+                            v-model="editedItem.colector"
+                            label="COLECTOR"
+                            outlined
+                        ></v-text-field>
+                        <span>IDENTIFICADOR TECNICO:</span>
+                        <v-text-field
+                            v-model="editedItem.fecha"
+                            label="FECHA"
+                            outlined
+                        ></v-text-field>
+                        <v-text-field
+                            v-model="editedItem.lote"
+                            label="LOTE"
+                            outlined
+                        ></v-text-field>
+                        <span>ORIGINAL:</span>
                         <v-text-field
                             v-model="editedItem.alto"
                             label="ALTO"
@@ -82,16 +99,6 @@
                             label="PROFUNDIDAD"
                             outlined
                         ></v-text-field>
-                        <v-text-field
-                            v-model="editedItem.calibre"
-                            label="CALIBRE"
-                            outlined
-                        ></v-text-field>
-                        <v-text-field
-                            v-model="editedItem.materiales"
-                            label="MATERIALES"
-                            outlined
-                        ></v-text-field>
                         <v-file-input
                             v-model="image"
                             show-size
@@ -104,33 +111,11 @@
                         ></v-file-input>
                     </v-col>
                     <v-col cols="12" sm="6">
-                        <span>DESCRIPTORES:</span>
-                        <v-text-field
-                            v-model="editedItem.mar"
-                            label="MAR/MOD"
-                            outlined
-                        ></v-text-field>
-                        <v-text-field
-                            v-model="editedItem.anx"
-                            label="ANX"
-                            outlined
-                        ></v-text-field>
-                        <v-text-field
-                            v-model="editedItem.sis"
-                            label="SIS"
-                            outlined
-                        ></v-text-field>
-                        <v-text-field
-                            v-model="editedItem.dec"
-                            label="DEC"
-                            outlined
-                        ></v-text-field>
                         <v-text-field
                             v-model="editedItem.ubicacion"
                             label="UBICACIÓN"
                             outlined
                         ></v-text-field>
-                        <span>TIPO DE REPRODUCCIÓN:</span>
                         <v-text-field
                             v-model="editedItem.estado"
                             label="ESTADO"
@@ -148,24 +133,13 @@
                             outlined
                         ></v-text-field>
                         <v-text-field
-                            v-model="editedItem.origen"
-                            label="ORIGEN"
-                            outlined
-                        ></v-text-field>
-                        <span>RELACIONADO CON:</span>
-                        <v-text-field
-                            v-model="editedItem.personalidad"
-                            label="PERSONALIDAD"
+                            v-model="editedItem.procedencia"
+                            label="PROCEDENCIA"
                             outlined
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.acontecimiento"
-                            label="ACONTECIMIENTO"
-                            outlined
-                        ></v-text-field>
-                        <v-text-field
-                            v-model="editedItem.tasacion"
-                            label="TASACIÓN"
+                            label="REL. ACONTECIMIENTO"
                             outlined
                         ></v-text-field>
                         <v-text-field
@@ -173,11 +147,6 @@
                             label="EXPEDIENTE"
                             outlined
                         ></v-text-field>
-                        <v-textarea
-                            outlined
-                            label="NOTAS"
-                            v-model="editedItem.notas"
-                        ></v-textarea>
                     </v-col>
                 </v-row>
             </v-container>
