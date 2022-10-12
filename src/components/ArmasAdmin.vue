@@ -142,7 +142,6 @@ export default {
                 align: 'center',
             },
         ],
-        desserts: [],
         editedIndex: -1,
         editedItem: {
             propietario: '',
@@ -154,7 +153,7 @@ export default {
             fabrica: '',
             noSerie: '',
             ciudadPais: '',
-            anio: '',
+            anio: 0,
             epoca: '',
             alto: '',
             ancho: '',
