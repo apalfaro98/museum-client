@@ -72,6 +72,14 @@ const createArma = async (arma = {}, image) => {
     return data;
 };
 
+const updateArma = async (arma = {}) => {
+    const resp = await axios.put(`/armas/${arma._id}`, {
+        ...arma,
+    });
+    const data = resp.data;
+    return data;
+};
+
 export default {
     auth,
     checkLogued,
@@ -82,4 +90,5 @@ export default {
     getPrestamos,
     getOnePrestamo,
     createArma,
+    updateArma,
 };

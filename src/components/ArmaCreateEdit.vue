@@ -100,6 +100,7 @@
                             outlined
                             prepend-inner-icon="mdi-camera"
                             prepend-icon=""
+                            :disabled="!isNew"
                         ></v-file-input>
                     </v-col>
                     <v-col cols="12" sm="6">
@@ -207,16 +208,29 @@ export default {
     },
     methods: {
         save() {
-            requests
-                .createArma(this.editedItem, this.image)
-                .then((data) => {
-                    console.log(data);
-                    this.$emit('close');
-                    this.$emit('reload');
-                })
-                .catch((err) => {
-                    console.log(err.response);
-                });
+            if (this.isNew) {
+                requests
+                    .createArma(this.editedItem, this.image)
+                    .then((data) => {
+                        console.log(data);
+                        this.$emit('close');
+                        this.$emit('reload');
+                    })
+                    .catch((err) => {
+                        console.log(err.response);
+                    });
+            } else {
+                requests
+                    .updateArma(this.editedItem)
+                    .then((data) => {
+                        console.log(data);
+                        this.$emit('close');
+                        this.$emit('reload');
+                    })
+                    .catch((err) => {
+                        console.log(err.response);
+                    });
+            }
         },
     },
 };
