@@ -55,6 +55,23 @@ const getOnePrestamo = async (id) => {
     return data;
 };
 
+const createArma = async (arma = {}, image) => {
+    const resp = await axios.post(
+        '/armas',
+        {
+            ...arma,
+            image,
+        },
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        }
+    );
+    const data = resp.data;
+    return data;
+};
+
 export default {
     auth,
     checkLogued,
@@ -64,4 +81,5 @@ export default {
     getNaturales,
     getPrestamos,
     getOnePrestamo,
+    createArma,
 };

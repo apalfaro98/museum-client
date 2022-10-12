@@ -29,7 +29,7 @@
                     </v-card>
                 </v-dialog>
 
-                <v-dialog v-model="dialog" max-width="500px">
+                <v-dialog v-model="dialog" max-width="1000">
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn
                             color="primary"
@@ -44,6 +44,9 @@
                     <arma-create-edit
                         :formTitle="formTitle"
                         :editedItem="editedItem"
+                        :isNew="isNew"
+                        @close="close"
+                        @reload="requestData"
                     />
                 </v-dialog>
 
@@ -97,6 +100,7 @@ export default {
         dialog: false,
         dialogInfo: false,
         dialogDelete: false,
+        isNew: true,
         headers: [
             {
                 text: 'INST/PROPIETARIO',
@@ -144,7 +148,7 @@ export default {
             propietario: '',
             codigo: '',
             noInventario: '',
-            cantidad: 0,
+            cantidad: 1,
             manifestacion: '',
             denominacion: '',
             fabrica: '',
@@ -171,14 +175,43 @@ export default {
             tasacion: '',
             expediente: '',
             notas: '',
+            prestado: false,
+            recibido: false,
         },
         infoItem: {},
         defaultItem: {
-            name: '',
-            calories: 0,
-            fat: 0,
-            carbs: 0,
-            protein: 0,
+            propietario: '',
+            codigo: '',
+            noInventario: '',
+            cantidad: 1,
+            manifestacion: '',
+            denominacion: '',
+            fabrica: '',
+            noSerie: '',
+            ciudadPais: '',
+            anio: 0,
+            epoca: '',
+            alto: '',
+            ancho: '',
+            profundidad: '',
+            calibre: '',
+            materiales: '',
+            mar: '',
+            anx: '',
+            sis: '',
+            dec: '',
+            ubicacion: '',
+            estado: '',
+            valor: '',
+            gradoDeValor: '',
+            origen: '',
+            personalidad: '',
+            acontecimiento: '',
+            tasacion: '',
+            expediente: '',
+            notas: '',
+            prestado: false,
+            recibido: false,
         },
     }),
     components: { ArmaDialog, ArmaCreateEdit },
@@ -221,6 +254,7 @@ export default {
             this.dialogInfo = true;
         },
         editItem(item) {
+            this.isNew = false;
             this.editedIndex = this.datos.indexOf(item);
             this.editedItem = Object.assign({}, item);
             this.dialog = true;
