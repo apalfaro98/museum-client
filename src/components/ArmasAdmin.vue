@@ -50,11 +50,11 @@
                     />
                 </v-dialog>
 
-                <v-dialog v-model="dialogDelete" max-width="500px">
+                <v-dialog v-model="dialogDelete" max-width="600px">
                     <v-card>
                         <v-card-title class="text-h5"
-                            >Are you sure you want to delete this
-                            item?</v-card-title
+                            >¿Está seguro que desea eliminar este
+                            artículo?</v-card-title
                         >
                         <v-card-actions>
                             <v-spacer></v-spacer>
@@ -62,13 +62,13 @@
                                 color="blue darken-1"
                                 text
                                 @click="closeDelete"
-                                >Cancel</v-btn
+                                >Cancelar</v-btn
                             >
                             <v-btn
                                 color="blue darken-1"
                                 text
                                 @click="deleteItemConfirm"
-                                >OK</v-btn
+                                >Aceptar</v-btn
                             >
                             <v-spacer></v-spacer>
                         </v-card-actions>
@@ -261,14 +261,22 @@ export default {
         },
 
         deleteItem(item) {
-            this.editedIndex = this.desserts.indexOf(item);
+            this.editedIndex = this.datos.indexOf(item);
             this.editedItem = Object.assign({}, item);
             this.dialogDelete = true;
         },
 
         deleteItemConfirm() {
-            this.desserts.splice(this.editedIndex, 1);
-            this.closeDelete();
+            requests
+                .deleteArma(this.editedItem._id)
+                .then((data) => {
+                    console.log(data);
+                    this.closeDelete();
+                    this.requestData();
+                })
+                .catch((err) => {
+                    console.log(err.response);
+                });
         },
 
         close() {

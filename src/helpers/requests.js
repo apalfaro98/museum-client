@@ -80,6 +80,42 @@ const updateArma = async (arma = {}) => {
     return data;
 };
 
+const deleteArma = async (id) => {
+    const resp = await axios.delete(`/armas/${id}`);
+    const data = resp.data;
+    return data;
+};
+const createNatural = async (natural = {}, image) => {
+    const resp = await axios.post(
+        '/naturales',
+        {
+            ...natural,
+            image,
+        },
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        }
+    );
+    const data = resp.data;
+    return data;
+};
+
+const updateNatural = async (natural = {}) => {
+    const resp = await axios.put(`/naturales/${natural._id}`, {
+        ...natural,
+    });
+    const data = resp.data;
+    return data;
+};
+
+const deleteNatural = async (id) => {
+    const resp = await axios.delete(`/naturales/${id}`);
+    const data = resp.data;
+    return data;
+};
+
 export default {
     auth,
     checkLogued,
@@ -91,4 +127,8 @@ export default {
     getOnePrestamo,
     createArma,
     updateArma,
+    deleteArma,
+    createNatural,
+    updateNatural,
+    deleteNatural,
 };
