@@ -45,7 +45,7 @@
                             v-model="editedItem.cantidad"
                             label="CANTIDAD"
                             outlined
-                            :rules="[rules.required]"
+                            :rules="[rules.required, rules.cant]"
                             type="number"
                         ></v-text-field>
                         <v-text-field
@@ -79,6 +79,7 @@
                             v-model="editedItem.anio"
                             label="AÑO"
                             outlined
+                            type="number"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.epoca"
@@ -156,24 +157,27 @@
                             :rules="[rules.required]"
                         ></v-text-field>
                         <span>TIPO DE REPRODUCCIÓN:</span>
-                        <v-text-field
+                        <v-combobox
                             v-model="editedItem.estado"
+                            :items="estados"
                             label="ESTADO"
                             outlined
                             class="mt-1"
                             :rules="[rules.required]"
-                        ></v-text-field>
+                        ></v-combobox>
                         <v-text-field
                             v-model="editedItem.valor"
                             label="VALOR"
                             outlined
                         ></v-text-field>
-                        <v-text-field
+                        <v-combobox
                             v-model="editedItem.gradoDeValor"
+                            :items="grados"
                             label="GRADO DE VALOR"
                             outlined
+                            class="mt-1"
                             :rules="[rules.required]"
-                        ></v-text-field>
+                        ></v-combobox>
                         <v-text-field
                             v-model="editedItem.origen"
                             label="ORIGEN"
@@ -230,8 +234,11 @@ export default {
             image: undefined,
             error: '',
             show: false,
+            estados: ['B', 'R', 'M'],
+            grados: ['I', 'II', 'III'],
             rules: {
                 required: (value) => !!value || 'Requerido.',
+                cant: (value) => value > 0 || 'La cantidad debe ser mayor a 0.',
             },
         };
     },
@@ -252,11 +259,70 @@ export default {
             }
         },
         save() {
+            if (this.editedItem.codigo === '') {
+                this.error = 'El codigo es obligatorio.';
+                return;
+            }
+            if (this.editedItem.noInventario === '') {
+                this.error = 'El numero de Inventario es obligatorio.';
+                return;
+            }
+            if (this.editedItem.cantidad === '') {
+                this.error = 'La cantidad es obligatoria.';
+                return;
+            }
+            if (this.editedItem.manifestacion === '') {
+                this.error = 'La manifestación es obligatoria.';
+                return;
+            }
+            if (this.editedItem.denominacion === '') {
+                this.error = 'La denominación es obligatoria.';
+                return;
+            }
+            if (this.editedItem.epoca === '') {
+                this.error = 'La época es obligatoria.';
+                return;
+            }
+            if (this.editedItem.alto === '') {
+                this.error = 'El alto es obligatorio.';
+                return;
+            }
+            if (this.editedItem.ancho === '') {
+                this.error = 'El ancho es obligatorio.';
+                return;
+            }
+            if (this.editedItem.profundidad === '') {
+                this.error = 'La profundidad es obligatoria.';
+                return;
+            }
+            if (this.editedItem.materiales === '') {
+                this.error = 'Los materiales son obligatorios.';
+                return;
+            }
+            if (this.editedItem.ubicacion === '') {
+                this.error = 'La ubicacion es obligatoria.';
+                return;
+            }
+            if (this.editedItem.estado === '') {
+                this.error = 'El estado es obligatorio.';
+                return;
+            }
+            if (this.editedItem.gradoDeValor === '') {
+                this.error = 'El Grado de Valor es obligatorio.';
+                return;
+            }
+            if (this.editedItem.origen === '') {
+                this.error = 'El Origen es obligatorio.';
+                return;
+            }
+            if (this.editedItem.expediente === '') {
+                this.error = 'El Expediente es obligatorio.';
+                return;
+            }
             if (this.isNew) {
                 requests
                     .createArma(this.editedItem, this.image)
-                    .then((data) => {
-                        console.log(data);
+                    .then(() => {
                         this.$emit('close');
                         this.$emit('reload');
                     })
@@ -264,8 +330,7 @@ export default {
             } else {
                 requests
                     .updateArma(this.editedItem)
-                    .then((data) => {
-                        console.log(data);
+                    .then(() => {
                         this.$emit('close');
                         this.$emit('reload');
                     })

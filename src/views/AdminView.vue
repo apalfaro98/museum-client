@@ -9,11 +9,11 @@
                 expand-on-hover
             >
                 <v-list nav dense>
-                    <v-list-item-group v-model="selectedItem" color="primary">
+                    <v-list-item-group color="primary">
                         <v-list-item
                             v-for="(item, i) in items"
                             :key="i"
-                            @click="selectedSection = -1"
+                            @click="selectNav(i)"
                         >
                             <v-list-item-icon>
                                 <v-icon v-text="item.icon"></v-icon>
@@ -33,16 +33,12 @@
                         <template v-slot:activator>
                             <v-list-item-title>Secciones</v-list-item-title>
                         </template>
-                        <v-list-item-group
-                            class="pl-6"
-                            v-model="selectedSection"
-                            color="primary"
-                        >
+                        <v-list-item-group class="pl-6" color="primary">
                             <v-list-item
                                 v-for="(item, i) in sections"
                                 :key="i"
                                 link
-                                @click="selectedItem = -1"
+                                @click="selectSection(i)"
                             >
                                 <v-list-item-icon>
                                     <v-icon v-text="item.icon"></v-icon>
@@ -91,6 +87,17 @@ export default {
             { text: 'Ciencias Naturales', icon: 'mdi-sprout' },
         ],
     }),
+    methods: {
+        selectNav(i) {
+            this.selectedItem = i;
+            this.selectedSection = -1;
+        },
+
+        selectSection(i) {
+            this.selectedSection = i;
+            this.selectedItem = -1;
+        },
+    },
 };
 </script>
 

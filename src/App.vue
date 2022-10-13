@@ -126,6 +126,7 @@ export default {
                     }
                 })
                 .catch(() => {
+                    this.logout();
                     if (this.$route.name === 'admin') {
                         this.$router.push('/login');
                     }
