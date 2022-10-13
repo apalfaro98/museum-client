@@ -31,6 +31,36 @@ const routes = [
         meta: { requiresAuth: true },
         component: () =>
             import(/* webpackChunkName: "admin" */ '../views/AdminView.vue'),
+        children: [
+            {
+                path: '/admin/estadistica',
+                component: () =>
+                    import(
+                        /* webpackChunkName: "adminEstadistica" */ '../views/HomeView.vue'
+                    ),
+            },
+            {
+                path: '/admin/prestamos',
+                component: () =>
+                    import(
+                        /* webpackChunkName: "adminPrestamos" */ '../components/PrestamosAdmin.vue'
+                    ),
+            },
+            {
+                path: '/admin/armas',
+                component: () =>
+                    import(
+                        /* webpackChunkName: "adminArmas" */ '../components/ArmasAdmin.vue'
+                    ),
+            },
+            {
+                path: '/admin/naturales',
+                component: () =>
+                    import(
+                        /* webpackChunkName: "adminNaturales" */ '../components/NaturalesAdmin.vue'
+                    ),
+            },
+        ],
     },
     {
         path: '/:idSection',

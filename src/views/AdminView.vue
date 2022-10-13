@@ -9,37 +9,14 @@
                 expand-on-hover
             >
                 <v-list nav dense>
-                    <v-list-item-group color="primary">
-                        <v-list-item
+                    <v-list-item-group color="primary" v-model="selectedItem">
+                        <router-link
                             v-for="(item, i) in items"
                             :key="i"
-                            @click="selectNav(i)"
+                            :to="item.route"
+                            class="link"
                         >
-                            <v-list-item-icon>
-                                <v-icon v-text="item.icon"></v-icon>
-                            </v-list-item-icon>
-                            <v-list-item-content>
-                                <v-list-item-title
-                                    v-text="item.text"
-                                ></v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list-item-group>
-                    <v-list-group
-                        :value="true"
-                        prepend-icon="mdi-file-document"
-                        no-action
-                    >
-                        <template v-slot:activator>
-                            <v-list-item-title>Secciones</v-list-item-title>
-                        </template>
-                        <v-list-item-group class="pl-6" color="primary">
-                            <v-list-item
-                                v-for="(item, i) in sections"
-                                :key="i"
-                                link
-                                @click="selectSection(i)"
-                            >
+                            <v-list-item @click="selectNav()">
                                 <v-list-item-icon>
                                     <v-icon v-text="item.icon"></v-icon>
                                 </v-list-item-icon>
@@ -49,16 +26,45 @@
                                     ></v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
+                        </router-link>
+                    </v-list-item-group>
+                    <v-list-group
+                        :value="true"
+                        prepend-icon="mdi-file-document"
+                        no-action
+                    >
+                        <template v-slot:activator>
+                            <v-list-item-title>Secciones</v-list-item-title>
+                        </template>
+                        <v-list-item-group
+                            class="pl-6"
+                            color="primary"
+                            v-model="selectedSection"
+                        >
+                            <router-link
+                                v-for="(item, i) in sections"
+                                :key="i"
+                                :to="item.route"
+                                class="link"
+                            >
+                                <v-list-item @click="selectSection()">
+                                    <v-list-item-icon>
+                                        <v-icon v-text="item.icon"></v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-content>
+                                        <v-list-item-title
+                                            v-text="item.text"
+                                        ></v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </router-link>
                         </v-list-item-group>
                     </v-list-group>
                 </v-list>
             </v-navigation-drawer>
         </v-card>
         <div class="ml-14">
-            <home-view v-if="selectedItem === 0" />
-            <prestamos-admin v-else-if="selectedItem === 1" />
-            <armas-admin v-if="selectedSection === 0" />
-            <naturales-admin v-else-if="selectedSection === 1" />
+            <router-view></router-view>
         </div>
     </div>
 </template>
@@ -79,22 +85,32 @@ export default {
         selectedItem: 0,
         selectedSection: -1,
         items: [
-            { text: 'Estadistica', icon: 'mdi-chart-line' },
-            { text: 'Prestamos', icon: 'mdi-hand-coin' },
+            {
+                text: 'Estadistica',
+                icon: 'mdi-chart-line',
+                route: '/admin/estadistica',
+            },
+            {
+                text: 'Prestamos',
+                icon: 'mdi-hand-coin',
+                route: '/admin/prestamos',
+            },
         ],
         sections: [
-            { text: 'Armas', icon: 'mdi-sword-cross' },
-            { text: 'Ciencias Naturales', icon: 'mdi-sprout' },
+            { text: 'Armas', icon: 'mdi-sword-cross', route: '/admin/armas' },
+            {
+                text: 'Ciencias Naturales',
+                icon: 'mdi-sprout',
+                route: '/admin/naturales',
+            },
         ],
     }),
     methods: {
-        selectNav(i) {
-            this.selectedItem = i;
+        selectNav() {
             this.selectedSection = -1;
         },
 
-        selectSection(i) {
-            this.selectedSection = i;
+        selectSection() {
             this.selectedItem = -1;
         },
     },
@@ -104,5 +120,8 @@ export default {
 <style scoped>
 .back {
     z-index: 1;
+}
+.link {
+    text-decoration: none;
 }
 </style>

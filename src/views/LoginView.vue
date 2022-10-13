@@ -90,7 +90,7 @@ export default {
                             name: user.name,
                             token: user.token,
                         });
-                        this.$router.push('/admin');
+                        this.$router.push('/admin/estadistica');
                     })
                     .catch((err) => {
                         console.log(err);

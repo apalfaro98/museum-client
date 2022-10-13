@@ -1,13 +1,19 @@
 <template>
     <v-app>
         <v-app-bar app color="light-blue" dark dense>
-            <router-link to="/" v-if="$route.name !== 'admin'">
+            <router-link
+                to="/"
+                v-if="$route.name && !$route.name.includes('admin')"
+            >
                 <div class="image-container">
                     <v-img src="@/assets/images/logo-small.png" />
                 </div>
             </router-link>
             <v-spacer></v-spacer>
-            <router-link to="/prestamos" v-if="$route.name !== 'admin'">
+            <router-link
+                to="/prestamos"
+                v-if="$route.name && !$route.name.includes('admin')"
+            >
                 <v-btn color="black" text plain class="font-weight-bold">
                     <v-icon class="pr-2">mdi-hand-coin</v-icon>
                     Prestamos
@@ -19,7 +25,7 @@
                 bottom
                 offset-y
                 rounded="br-xl tl-xl"
-                v-if="$route.name !== 'admin'"
+                v-if="$route.name && !$route.name.includes('admin')"
             >
                 <template v-slot:activator="{ on, attrs }">
                     <v-btn
@@ -49,7 +55,10 @@
                     </v-list-item>
                 </v-list>
             </v-menu>
-            <router-link to="/login" v-if="$route.name !== 'admin'">
+            <router-link
+                to="/login"
+                v-if="$route.name && !$route.name.includes('admin')"
+            >
                 <v-btn color="black" text plain class="font-weight-bold">
                     <v-icon class="pr-2">mdi-account-lock</v-icon>
                     Administrar
