@@ -82,7 +82,7 @@ export default {
         NaturalesAdmin,
     },
     data: () => ({
-        selectedItem: 0,
+        selectedItem: -1,
         selectedSection: -1,
         items: [
             {
@@ -105,6 +105,24 @@ export default {
             },
         ],
     }),
+    mounted() {
+        if (this.$route.path.includes('estadistica')) {
+            this.selectedItem = 0;
+            return;
+        }
+        if (this.$route.path.includes('prestamos')) {
+            this.selectedItem = 1;
+            return;
+        }
+        if (this.$route.path.includes('armas')) {
+            this.selectedSection = 0;
+            return;
+        }
+        if (this.$route.path.includes('naturales')) {
+            this.selectedSection = 1;
+            return;
+        }
+    },
     methods: {
         selectNav() {
             this.selectedSection = -1;

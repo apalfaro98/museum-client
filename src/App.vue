@@ -118,25 +118,22 @@ export default {
             requests
                 .checkLogued(token)
                 .then((data) => {
-                    console.log(data);
                     if (data.logued) {
                         localStorage.setItem('name', data.name);
                         this.$store.commit('login', {
                             name: data.name,
                             token,
                         });
-                        console.log(this.$route.name);
-                        if (this.$route.name != 'admin') {
-                            this.$router.push('/admin');
+                        if (!this.$route.name.includes('admin')) {
+                            this.$router.push('/admin/estadistica');
                         }
-                        console.log('Entro');
                     } else {
                         this.logout();
                     }
                 })
                 .catch(() => {
                     this.logout();
-                    if (this.$route.name === 'admin') {
+                    if (this.$route.name.includes('admin')) {
                         this.$router.push('/login');
                     }
                 });
