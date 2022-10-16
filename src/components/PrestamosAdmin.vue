@@ -1,90 +1,121 @@
 <template>
-    <v-data-table
-        :headers="headers"
-        :items="datos"
-        :items-per-page="-1"
-        class="elevation-1 mt-2"
-        hide-default-footer
-    >
-        <template v-slot:top>
-            <v-toolbar flat>
-                <v-toolbar-title>Préstamos</v-toolbar-title>
-                <v-divider class="mx-4" inset vertical></v-divider>
-                <v-spacer></v-spacer>
-                <v-dialog v-model="dialogInfo" max-width="1000">
-                    <v-card class="pa-4">
-                        <v-card-text>
-                            <arma-dialog
-                                v-if="infoItem.seccion === 'armas'"
-                                :editedItem="articulo"
-                            />
-                            <natural-dialog
-                                v-else-if="infoItem.seccion === 'naturales'"
-                                :editedItem="articulo"
-                            />
-                        </v-card-text>
+    <div>
+        <v-scroll-x-reverse-transition>
+            <v-alert
+                prominent
+                shaped
+                type="success"
+                max-width="300px"
+                dismissible
+                v-if="success"
+                @click="success = false"
+                class="alert"
+                >Préstamo realizado exitosamente.</v-alert
+            >
+        </v-scroll-x-reverse-transition>
+        <v-data-table
+            :headers="headers"
+            :items="datos"
+            :items-per-page="-1"
+            class="elevation-1 mt-2"
+            hide-default-footer
+        >
+            <template v-slot:top>
+                <v-toolbar flat>
+                    <v-toolbar-title>Préstamos</v-toolbar-title>
+                    <v-divider class="mx-4" inset vertical></v-divider>
+                    <v-spacer></v-spacer>
+                    <v-dialog v-model="dialogInfo" max-width="1000">
+                        <v-card class="pa-4">
+                            <v-card-text>
+                                <arma-dialog
+                                    v-if="infoItem.seccion === 'armas'"
+                                    :editedItem="articulo"
+                                />
+                                <natural-dialog
+                                    v-else-if="infoItem.seccion === 'naturales'"
+                                    :editedItem="articulo"
+                                />
+                            </v-card-text>
 
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="red darken-1" text @click="closeInfo">
-                                Cerrar
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn
+                                    color="red darken-1"
+                                    text
+                                    @click="closeInfo"
+                                >
+                                    Cerrar
+                                </v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                    <v-dialog v-model="dialog" max-width="1000px">
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-btn
+                                color="primary"
+                                dark
+                                class="mb-2"
+                                v-bind="attrs"
+                                v-on="on"
+                            >
+                                Nuevo Préstamo
                             </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
-                <v-dialog v-model="dialog" max-width="1000px">
-                    <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                            color="primary"
-                            dark
-                            class="mb-2"
-                            v-bind="attrs"
-                            v-on="on"
-                        >
-                            Nuevo Préstamo
-                        </v-btn>
-                    </template>
-                    <prestamo-stepper @close="close" />
-                </v-dialog>
-                <v-dialog v-model="dialogDelete" max-width="500px">
-                    <v-card>
-                        <v-card-title class="text-h5"
-                            >Are you sure you want to delete this
-                            item?</v-card-title
-                        >
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn
-                                color="blue darken-1"
-                                text
-                                @click="closeDelete"
-                                >Cancel</v-btn
+                        </template>
+                        <prestamo-stepper
+                            v-if="isNew"
+                            :editedItem="editedItem"
+                            formTitle="Realizar préstamo"
+                            :isNew="true"
+                            @close="close"
+                            @reload="reload"
+                        />
+                        <prestamo-create-edit
+                            v-else
+                            :editedItem="editedItem"
+                            :formTitle="formTitle"
+                            :isNew="isNew"
+                            @close="close"
+                            @reload="reload"
+                        />
+                    </v-dialog>
+                    <v-dialog v-model="dialogDelete" max-width="700px">
+                        <v-card>
+                            <v-card-title class="text-h5"
+                                >¿Está seguro que desea eliminar este
+                                registro?</v-card-title
                             >
-                            <v-btn
-                                color="blue darken-1"
-                                text
-                                @click="deleteItemConfirm"
-                                >OK</v-btn
-                            >
-                            <v-spacer></v-spacer>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
-            </v-toolbar>
-        </template>
-        <template v-slot:item.actions="{ item }">
-            <v-icon small class="mr-2" @click="detailsItem(item)">
-                mdi-information
-            </v-icon>
-            <v-icon small class="mr-2" @click="editItem(item)">
-                mdi-pencil
-            </v-icon>
-            <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
-        </template>
-        <template v-slot:no-data>
-            <v-btn color="primary" @click="initialize"> Reset </v-btn>
-        </template>
-    </v-data-table>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn
+                                    color="blue darken-1"
+                                    text
+                                    @click="closeDelete"
+                                    >Cancelar</v-btn
+                                >
+                                <v-btn
+                                    color="blue darken-1"
+                                    text
+                                    @click="deleteItemConfirm"
+                                    >Aceptar</v-btn
+                                >
+                                <v-spacer></v-spacer>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                </v-toolbar>
+            </template>
+            <template v-slot:item.actions="{ item }">
+                <v-icon small class="mr-2" @click="detailsItem(item)">
+                    mdi-information
+                </v-icon>
+                <v-icon small class="mr-2" @click="editItem(item)">
+                    mdi-pencil
+                </v-icon>
+                <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+            </template>
+        </v-data-table>
+    </div>
 </template>
 
 <script>
@@ -92,6 +123,7 @@ import requests from '@/helpers/requests';
 import ArmaDialog from '@/components/ArmaDialog.vue';
 import NaturalDialog from '@/components/NaturalDialog.vue';
 import PrestamoStepper from '@/components/PrestamoStepper.vue';
+import PrestamoCreateEdit from '@/components/PrestamoCreateEdit.vue';
 export default {
     data: () => ({
         datos: [],
@@ -99,6 +131,8 @@ export default {
         dialog: false,
         dialogInfo: false,
         dialogDelete: false,
+        success: false,
+        isNew: true,
         headers: [
             { text: 'MUSEO', value: 'museo' },
             { text: 'CANTIDAD', value: 'cantidad' },
@@ -114,29 +148,45 @@ export default {
                 align: 'center',
             },
         ],
-        desserts: [],
         editedIndex: -1,
         editedItem: {
-            name: '',
-            calories: 0,
-            fat: 0,
-            carbs: 0,
-            protein: 0,
+            prestado: true,
+            museo: '',
+            persona: '',
+            organismo: '',
+            cantidad: 1,
+            entregadoPor: '',
+            fechaDevolucion: Date.now(),
+            seccion: 'armas',
+            elementId: '',
+            observaciones: '',
         },
         infoItem: {},
         defaultItem: {
-            name: '',
-            calories: 0,
-            fat: 0,
-            carbs: 0,
-            protein: 0,
+            prestado: true,
+            museo: '',
+            persona: '',
+            organismo: '',
+            cantidad: 1,
+            entregadoPor: '',
+            fechaDevolucion: Date.now(),
+            seccion: 'armas',
+            elementId: '',
+            observaciones: '',
         },
     }),
-    components: { ArmaDialog, NaturalDialog, PrestamoStepper },
+    components: {
+        ArmaDialog,
+        NaturalDialog,
+        PrestamoStepper,
+        PrestamoCreateEdit,
+    },
 
     computed: {
         formTitle() {
-            return this.editedIndex === -1 ? 'New Item' : 'Edit Item';
+            return this.editedIndex === -1
+                ? 'Registrar Préstamo'
+                : 'Editar Préstamo';
         },
     },
 
@@ -149,9 +199,6 @@ export default {
         },
     },
 
-    created() {
-        this.initialize();
-    },
     mounted() {
         this.requestPrestamos();
     },
@@ -171,82 +218,13 @@ export default {
                 this.articulo = data.articulo;
                 this.articulo.registroEntrada =
                     this.articulo.registroEntrada.slice(0, 10);
-                console.log(data);
             });
         },
-        initialize() {
-            this.desserts = [
-                {
-                    name: 'Frozen Yogurt',
-                    calories: 159,
-                    fat: 6.0,
-                    carbs: 24,
-                    protein: 4.0,
-                },
-                {
-                    name: 'Ice cream sandwich',
-                    calories: 237,
-                    fat: 9.0,
-                    carbs: 37,
-                    protein: 4.3,
-                },
-                {
-                    name: 'Eclair',
-                    calories: 262,
-                    fat: 16.0,
-                    carbs: 23,
-                    protein: 6.0,
-                },
-                {
-                    name: 'Cupcake',
-                    calories: 305,
-                    fat: 3.7,
-                    carbs: 67,
-                    protein: 4.3,
-                },
-                {
-                    name: 'Gingerbread',
-                    calories: 356,
-                    fat: 16.0,
-                    carbs: 49,
-                    protein: 3.9,
-                },
-                {
-                    name: 'Jelly bean',
-                    calories: 375,
-                    fat: 0.0,
-                    carbs: 94,
-                    protein: 0.0,
-                },
-                {
-                    name: 'Lollipop',
-                    calories: 392,
-                    fat: 0.2,
-                    carbs: 98,
-                    protein: 0,
-                },
-                {
-                    name: 'Honeycomb',
-                    calories: 408,
-                    fat: 3.2,
-                    carbs: 87,
-                    protein: 6.5,
-                },
-                {
-                    name: 'Donut',
-                    calories: 452,
-                    fat: 25.0,
-                    carbs: 51,
-                    protein: 4.9,
-                },
-                {
-                    name: 'KitKat',
-                    calories: 518,
-                    fat: 26.0,
-                    carbs: 65,
-                    protein: 7,
-                },
-            ];
+
+        reload() {
+            this.close();
+            this.success = true;
+            this.requestPrestamos();
         },
 
         detailsItem(item) {
@@ -256,20 +234,30 @@ export default {
             this.dialogInfo = true;
         },
         editItem(item) {
-            this.editedIndex = this.desserts.indexOf(item);
+            this.success = false;
+            this.isNew = false;
+            this.editedIndex = this.datos.indexOf(item);
             this.editedItem = Object.assign({}, item);
             this.dialog = true;
         },
 
         deleteItem(item) {
-            this.editedIndex = this.desserts.indexOf(item);
+            this.success = false;
+            this.editedIndex = this.datos.indexOf(item);
             this.editedItem = Object.assign({}, item);
             this.dialogDelete = true;
         },
 
         deleteItemConfirm() {
-            this.desserts.splice(this.editedIndex, 1);
-            this.closeDelete();
+            requests
+                .deletePrestamo(this.editedItem._id)
+                .then((data) => {
+                    this.closeDelete();
+                    this.requestPrestamos();
+                })
+                .catch((err) => {
+                    console.log(err.response);
+                });
         },
 
         close() {
@@ -308,4 +296,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.alert {
+    position: absolute;
+    right: 0;
+    top: 50px;
+    z-index: 3;
+}
+</style>

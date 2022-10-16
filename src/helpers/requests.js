@@ -115,6 +115,23 @@ const deleteNatural = async (id) => {
     const data = resp.data;
     return data;
 };
+const createPrestamo = async (prestamo = {}) => {
+    const resp = await axios.post('/prestamos', prestamo);
+    const data = resp.data;
+    return data;
+};
+
+const updatePrestamo = async (prestamo = {}) => {
+    const resp = await axios.put(`/prestamos/${prestamo._id}`, prestamo);
+    const data = resp.data;
+    return data;
+};
+
+const deletePrestamo = async (id) => {
+    const resp = await axios.delete(`/prestamos/${id}`);
+    const data = resp.data;
+    return data;
+};
 
 export default {
     auth,
@@ -131,4 +148,7 @@ export default {
     createNatural,
     updateNatural,
     deleteNatural,
+    createPrestamo,
+    updatePrestamo,
+    deletePrestamo,
 };

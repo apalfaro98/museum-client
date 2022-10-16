@@ -260,6 +260,7 @@ export default {
         },
 
         reload() {
+            this.close();
             this.success = true;
             this.requestData();
         },

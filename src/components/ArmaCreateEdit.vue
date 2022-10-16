@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <v-card elevation="0">
         <v-card-title>
             <span class="text-h5">{{ formTitle }}</span>
         </v-card-title>
@@ -322,16 +322,15 @@ export default {
             if (this.isNew) {
                 requests
                     .createArma(this.editedItem, this.image)
-                    .then(() => {
-                        this.$emit('close');
+                    .then((data) => {
                         this.$emit('reload');
+                        this.$emit('getId', data._id);
                     })
                     .catch(this.showErrors);
             } else {
                 requests
                     .updateArma(this.editedItem)
                     .then(() => {
-                        this.$emit('close');
                         this.$emit('reload');
                     })
                     .catch(this.showErrors);

@@ -111,7 +111,7 @@ export default {
         if (!token) {
             this.$store.commit('logout');
             localStorage.removeItem('name');
-            if (this.$route.name === 'admin') {
+            if (this.$route.path.includes('admin')) {
                 this.$router.push('/login');
             }
         } else {
@@ -124,16 +124,19 @@ export default {
                             name: data.name,
                             token,
                         });
-                        if (!this.$route.name.includes('admin')) {
+                        if (!this.$route.path.includes('admin')) {
                             this.$router.push('/admin/estadistica');
                         }
                     } else {
                         this.logout();
+                        if (this.$route.path.includes('admin')) {
+                            this.$router.push('/login');
+                        }
                     }
                 })
                 .catch(() => {
                     this.logout();
-                    if (this.$route.name.includes('admin')) {
+                    if (this.$route.path.includes('admin')) {
                         this.$router.push('/login');
                     }
                 });
