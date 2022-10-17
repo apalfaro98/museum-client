@@ -159,6 +159,14 @@
                 <property-element
                     :items="[
                         {
+                            title: 'ENTREGADO POR',
+                            value: editedItem.entregadoPor,
+                        },
+                    ]"
+                />
+                <property-element
+                    :items="[
+                        {
                             title: 'NOTAS',
                             value: editedItem.notas,
                         },

@@ -174,6 +174,17 @@
                             outlined
                             :rules="[rules.required]"
                         ></v-text-field>
+                        <v-checkbox
+                            v-model="editedItem.donacion"
+                            label="DONACION"
+                            :disabled="!isNew"
+                        ></v-checkbox>
+                        <v-text-field
+                            v-model="editedItem.entregadoPor"
+                            label="DONANTE"
+                            outlined
+                            :disabled="!isNew"
+                        ></v-text-field>
                         <v-text-field
                             v-model="editedItem.expediente"
                             label="EXPEDIENTE"

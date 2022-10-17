@@ -135,6 +135,14 @@
                         },
                     ]"
                 />
+                <property-element
+                    :items="[
+                        {
+                            title: 'ENTREGADO POR',
+                            value: editedItem.entregadoPor,
+                        },
+                    ]"
+                />
             </v-col>
         </v-row>
     </v-container>
