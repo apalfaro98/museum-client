@@ -72,6 +72,7 @@
 <script>
 import HomeView from '@/views/HomeView.vue';
 import PrestamosAdmin from '@/components/PrestamosAdmin.vue';
+import TransferenciasAdmin from '@/components/TransferenciasAdmin.vue';
 import ArmasAdmin from '@/components/ArmasAdmin.vue';
 import NaturalesAdmin from '@/components/NaturalesAdmin.vue';
 export default {
@@ -80,6 +81,7 @@ export default {
         PrestamosAdmin,
         ArmasAdmin,
         NaturalesAdmin,
+        TransferenciasAdmin,
     },
     data: () => ({
         selectedItem: -1,
@@ -94,6 +96,11 @@ export default {
                 text: 'Prestamos',
                 icon: 'mdi-hand-coin',
                 route: '/admin/prestamos',
+            },
+            {
+                text: 'Transferencias',
+                icon: 'mdi-bank-transfer',
+                route: '/admin/transferencias',
             },
         ],
         sections: [

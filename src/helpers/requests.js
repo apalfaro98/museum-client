@@ -133,6 +133,23 @@ const deletePrestamo = async (id) => {
     return data;
 };
 
+const getTransferencias = async () => {
+    const resp = await axios.get('/transferencias');
+    const data = resp.data;
+    return data;
+};
+const getOneTransferencia = async (id) => {
+    const resp = await axios.get(`/transferencias/${id}`);
+    const data = resp.data;
+    return data;
+};
+
+const createTransferencia = async (transferencia = {}) => {
+    const resp = await axios.post('/transferencias', transferencia);
+    const data = resp.data;
+    return data;
+};
+
 export default {
     auth,
     checkLogued,
@@ -151,4 +168,7 @@ export default {
     createPrestamo,
     updatePrestamo,
     deletePrestamo,
+    getTransferencias,
+    createTransferencia,
+    getOneTransferencia,
 };

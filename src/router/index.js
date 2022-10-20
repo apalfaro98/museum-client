@@ -47,6 +47,13 @@ const routes = [
                     ),
             },
             {
+                path: '/admin/transferencias',
+                component: () =>
+                    import(
+                        /* webpackChunkName: "adminTransferencias" */ '../components/TransferenciasAdmin.vue'
+                    ),
+            },
+            {
                 path: '/admin/armas',
                 component: () =>
                     import(
