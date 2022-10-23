@@ -261,6 +261,7 @@ export default {
         },
 
         close() {
+            this.isNew = true;
             this.dialog = false;
             this.$nextTick(() => {
                 this.editedItem = Object.assign({}, this.defaultItem);

@@ -34,6 +34,7 @@ const routes = [
         children: [
             {
                 path: '/admin/estadistica',
+                meta: { requiresAuth: true },
                 component: () =>
                     import(
                         /* webpackChunkName: "adminEstadistica" */ '../views/HomeView.vue'
@@ -41,6 +42,7 @@ const routes = [
             },
             {
                 path: '/admin/prestamos',
+                meta: { requiresAuth: true },
                 component: () =>
                     import(
                         /* webpackChunkName: "adminPrestamos" */ '../components/PrestamosAdmin.vue'
@@ -48,6 +50,7 @@ const routes = [
             },
             {
                 path: '/admin/transferencias',
+                meta: { requiresAuth: true },
                 component: () =>
                     import(
                         /* webpackChunkName: "adminTransferencias" */ '../components/TransferenciasAdmin.vue'
@@ -55,6 +58,7 @@ const routes = [
             },
             {
                 path: '/admin/armas',
+                meta: { requiresAuth: true },
                 component: () =>
                     import(
                         /* webpackChunkName: "adminArmas" */ '../components/ArmasAdmin.vue'
@@ -62,6 +66,7 @@ const routes = [
             },
             {
                 path: '/admin/naturales',
+                meta: { requiresAuth: true },
                 component: () =>
                     import(
                         /* webpackChunkName: "adminNaturales" */ '../components/NaturalesAdmin.vue'
@@ -93,6 +98,8 @@ const isAuthenticatedGuard = () => {
 router.beforeEach((to, from, next) => {
     if (to.meta.requiresAuth && !isAuthenticatedGuard()) {
         return next('/login');
+    } else if (!to.meta.requiresAuth && isAuthenticatedGuard()) {
+        return next('/admin/estadistica');
     } else {
         return next();
     }
