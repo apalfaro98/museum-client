@@ -215,7 +215,7 @@
                             v-model="editedItem.entregadoPor"
                             label="DONANTE"
                             outlined
-                            :disabled="!isNew"
+                            :disabled="!isNew || !editedItem.donacion"
                         ></v-text-field>
                         <v-textarea
                             outlined
