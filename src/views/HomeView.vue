@@ -1,6 +1,17 @@
 <template>
     <div>
-        <v-simple-table class="mt-10">
+        <div class="d-flex justify-end">
+            <v-btn
+                color="#217345"
+                class="mt-5 mr-5 font-weight-bold"
+                dark
+                @click="exportTable"
+            >
+                <v-icon class="mr-1">mdi-file-excel</v-icon>
+                Exportar
+            </v-btn>
+        </div>
+        <v-simple-table class="mt-5" id="estadistica">
             <template v-slot:default>
                 <tbody>
                     <tr class="gray">
@@ -43,15 +54,23 @@
                         <td class="br-gray">{{ item.name }}</td>
                         <td class="text-center">{{ item.gradoIB }}</td>
                         <td class="text-center">{{ item.gradoIR }}</td>
-                        <td class="text-center br-gray">{{ item.gradoIM }}</td>
+                        <td class="text-center br-gray">
+                            {{ item.gradoIM }}
+                        </td>
                         <td class="text-center">{{ item.gradoIIB }}</td>
                         <td class="text-center">{{ item.gradoIIR }}</td>
-                        <td class="text-center br-gray">{{ item.gradoIIM }}</td>
+                        <td class="text-center br-gray">
+                            {{ item.gradoIIM }}
+                        </td>
                         <td class="text-center">{{ item.gradoIIIB }}</td>
                         <td class="text-center">{{ item.gradoIIIR }}</td>
                         <td class="text-center">{{ item.gradoIIIM }}</td>
-                        <td class="text-center bl-gray">{{ item.total }}</td>
-                        <td class="text-center bl-gray">{{ item.excep }}</td>
+                        <td class="text-center bl-gray">
+                            {{ item.total }}
+                        </td>
+                        <td class="text-center bl-gray">
+                            {{ item.excep }}
+                        </td>
                         <td class="text-center bl-gray">{{ item.sala }}</td>
                         <td class="text-center bl-gray">{{ item.expo }}</td>
                     </tr>
@@ -134,6 +153,7 @@
 
 <script>
 import requests from '../helpers/requests';
+import { utils, writeFile } from 'xlsx';
 export default {
     name: 'Home',
     data() {
@@ -155,6 +175,12 @@ export default {
                     console.log(err);
                     // TODO: Poner imagen de error de conexion.
                 });
+        },
+        exportTable() {
+            const table = document.querySelector('#estadistica table');
+            const wb = utils.table_to_book(table);
+
+            writeFile(wb, 'Estadistica.xlsx');
         },
     },
     computed: {
