@@ -57,6 +57,22 @@ const routes = [
                     ),
             },
             {
+                path: '/admin/donaciones',
+                meta: { requiresAuth: true },
+                component: () =>
+                    import(
+                        /* webpackChunkName: "adminDonacion" */ '../components/DonacionAdmin.vue'
+                    ),
+            },
+            {
+                path: '/admin/bajas',
+                meta: { requiresAuth: true },
+                component: () =>
+                    import(
+                        /* webpackChunkName: "adminBajas" */ '../components/BajasAdmin.vue'
+                    ),
+            },
+            {
                 path: '/admin/armas',
                 meta: { requiresAuth: true },
                 component: () =>

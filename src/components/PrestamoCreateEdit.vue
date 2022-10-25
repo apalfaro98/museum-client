@@ -30,19 +30,16 @@
                             v-model="editedItem.persona"
                             label="BENEFICIARIO"
                             outlined
-                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.organismo"
                             label="ORGANISMO"
                             outlined
-                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.cantidad"
                             label="CANTIDAD"
                             outlined
-                            :rules="[rules.required, rules.cant]"
                             type="number"
                             :disabled="!editedItem.prestado"
                         ></v-text-field>
@@ -53,7 +50,6 @@
                             label="PERSONA DEL MUSEO QUE ENTREGA O RECIBE"
                             outlined
                             :disabled="!isNew"
-                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-menu
                             ref="menu"
@@ -129,10 +125,6 @@ export default {
             date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
                 .toISOString()
                 .substr(0, 10),
-            rules: {
-                required: (value) => !!value || 'Requerido.',
-                cant: (value) => value > 0 || 'La cantidad debe ser mayor a 0.',
-            },
         };
     },
     props: {

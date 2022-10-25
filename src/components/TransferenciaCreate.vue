@@ -34,13 +34,11 @@
                             v-model="editedItem.responsableT"
                             label="ENTREGADO POR"
                             outlined
-                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.cantidad"
                             label="CANTIDAD"
                             outlined
-                            :rules="[rules.required, rules.cant]"
                             type="number"
                         ></v-text-field>
                     </v-col>
@@ -49,13 +47,11 @@
                             v-model="editedItem.responsableR"
                             label="RECIBIDO POR"
                             outlined
-                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.museoR"
                             label="MUSEO QUE RECIBE"
                             outlined
-                            :rules="[rules.required]"
                         ></v-text-field>
                         <h3>Elige la sección:</h3>
                         <v-radio-group
@@ -89,7 +85,6 @@
                             :items="inventario"
                             label="No. de Inventario"
                             outlined
-                            :rules="[rules.required]"
                         ></v-select>
                     </v-col>
                 </v-row>
@@ -116,10 +111,6 @@ export default {
             armas: [],
             naturales: [],
             inventario: [],
-            rules: {
-                required: (value) => !!value || 'Requerido.',
-                cant: (value) => value > 0 || 'La cantidad debe ser mayor a 0.',
-            },
         };
     },
     props: {

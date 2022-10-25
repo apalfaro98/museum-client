@@ -49,8 +49,38 @@ const getPrestamos = async () => {
     return data;
 };
 
+const getDonaciones = async () => {
+    const resp = await axios.get('/donaciones');
+    const data = resp.data;
+    return data;
+};
+
+const getBajas = async () => {
+    const resp = await axios.get('/bajas');
+    const data = resp.data;
+    return data;
+};
+
+const getOneArma = async (id) => {
+    const resp = await axios.get(`/armas/${id}`);
+    const data = resp.data;
+    return data;
+};
+
+const getOneNatural = async (id) => {
+    const resp = await axios.get(`/naturales/${id}`);
+    const data = resp.data;
+    return data;
+};
+
 const getOnePrestamo = async (id) => {
     const resp = await axios.get(`/prestamos/${id}`);
+    const data = resp.data;
+    return data;
+};
+
+const getOneDonacion = async (id) => {
+    const resp = await axios.get(`/donaciones/${id}`);
     const data = resp.data;
     return data;
 };
@@ -150,6 +180,12 @@ const createTransferencia = async (transferencia = {}) => {
     return data;
 };
 
+const createDonacion = async (donacion = {}) => {
+    const resp = await axios.post('/donaciones', donacion);
+    const data = resp.data;
+    return data;
+};
+
 export default {
     auth,
     checkLogued,
@@ -171,4 +207,10 @@ export default {
     getTransferencias,
     createTransferencia,
     getOneTransferencia,
+    getDonaciones,
+    getOneDonacion,
+    createDonacion,
+    getBajas,
+    getOneArma,
+    getOneNatural,
 };

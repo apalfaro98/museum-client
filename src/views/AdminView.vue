@@ -73,6 +73,7 @@
 import HomeView from '@/views/HomeView.vue';
 import PrestamosAdmin from '@/components/PrestamosAdmin.vue';
 import TransferenciasAdmin from '@/components/TransferenciasAdmin.vue';
+import DonacionAdmin from '@/components/DonacionAdmin.vue';
 import ArmasAdmin from '@/components/ArmasAdmin.vue';
 import NaturalesAdmin from '@/components/NaturalesAdmin.vue';
 export default {
@@ -82,6 +83,7 @@ export default {
         ArmasAdmin,
         NaturalesAdmin,
         TransferenciasAdmin,
+        DonacionAdmin,
     },
     data: () => ({
         selectedItem: -1,
@@ -102,6 +104,16 @@ export default {
                 icon: 'mdi-bank-transfer',
                 route: '/admin/transferencias',
             },
+            {
+                text: 'Donaciones',
+                icon: 'mdi-gift',
+                route: '/admin/donaciones',
+            },
+            {
+                text: 'Bajas',
+                icon: 'mdi-trash-can',
+                route: '/admin/bajas',
+            },
         ],
         sections: [
             { text: 'Armas', icon: 'mdi-sword-cross', route: '/admin/armas' },
@@ -119,6 +131,18 @@ export default {
         }
         if (this.$route.path.includes('prestamos')) {
             this.selectedItem = 1;
+            return;
+        }
+        if (this.$route.path.includes('transferencias')) {
+            this.selectedItem = 2;
+            return;
+        }
+        if (this.$route.path.includes('donaciones')) {
+            this.selectedItem = 3;
+            return;
+        }
+        if (this.$route.path.includes('bajas')) {
+            this.selectedItem = 4;
             return;
         }
         if (this.$route.path.includes('armas')) {

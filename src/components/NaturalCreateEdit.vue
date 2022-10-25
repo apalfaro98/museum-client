@@ -32,27 +32,23 @@
                             label="CODIGO"
                             outlined
                             :disabled="!isNew"
-                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.noInventario"
                             label="NO.INVENTARIO"
                             outlined
                             :disabled="!isNew"
-                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.cantidad"
                             label="CANTIDAD"
                             outlined
                             type="number"
-                            :rules="[rules.required, rules.cant]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.manifestacion"
                             label="MANIFESTACIÓN"
                             outlined
-                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.categoria"
@@ -63,7 +59,6 @@
                             v-model="editedItem.comun"
                             label="NOMBRE COMUN"
                             outlined
-                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.tecnico"
@@ -74,19 +69,16 @@
                             v-model="editedItem.locColecta"
                             label="LOC. DE COLECTA"
                             outlined
-                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.pais"
                             label="PAIS"
                             outlined
-                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.fechaColecta"
                             label="FECHA DE COLECTA"
                             outlined
-                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.colector"
@@ -111,19 +103,16 @@
                             v-model="editedItem.alto"
                             label="ALTO"
                             outlined
-                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.ancho"
                             label="ANCHO"
                             outlined
-                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.profundidad"
                             label="PROFUNDIDAD"
                             outlined
-                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-file-input
                             v-model="image"
@@ -134,13 +123,11 @@
                             prepend-inner-icon="mdi-camera"
                             prepend-icon=""
                             :disabled="!isNew"
-                            :rules="[rules.required]"
                         ></v-file-input>
                         <v-text-field
                             v-model="editedItem.ubicacion"
                             label="UBICACIÓN"
                             outlined
-                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-combobox
                             v-model="editedItem.estado"
@@ -148,7 +135,6 @@
                             label="ESTADO"
                             outlined
                             class="mt-1"
-                            :rules="[rules.required]"
                         ></v-combobox>
                         <v-text-field
                             v-model="editedItem.valor"
@@ -160,36 +146,21 @@
                             :items="grados"
                             label="GRADO DE VALOR"
                             outlined
-                            :rules="[rules.required]"
                         ></v-combobox>
                         <v-text-field
                             v-model="editedItem.procedencia"
                             label="PROCEDENCIA"
                             outlined
-                            :rules="[rules.required]"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.acontecimiento"
                             label="REL. ACONTECIMIENTO"
                             outlined
-                            :rules="[rules.required]"
-                        ></v-text-field>
-                        <v-checkbox
-                            v-model="editedItem.donacion"
-                            label="DONACION"
-                            :disabled="!isNew"
-                        ></v-checkbox>
-                        <v-text-field
-                            v-model="editedItem.entregadoPor"
-                            label="DONANTE"
-                            outlined
-                            :disabled="!isNew || !editedItem.donacion"
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.expediente"
                             label="EXPEDIENTE"
                             outlined
-                            :rules="[rules.required]"
                         ></v-text-field>
                     </v-col>
                 </v-row>
@@ -216,10 +187,6 @@ export default {
             show: false,
             estados: ['B', 'R', 'M'],
             grados: ['I', 'II', 'III'],
-            rules: {
-                required: (value) => !!value || 'Requerido.',
-                cant: (value) => value > 0 || 'La cantidad debe ser mayor a 0.',
-            },
         };
     },
     props: {
