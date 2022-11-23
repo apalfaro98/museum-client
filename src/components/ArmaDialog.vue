@@ -14,7 +14,7 @@
                             value: editedItem.propietario,
                         },
                         {
-                            title: 'CODIGO',
+                            title: 'CÓDIGO',
                             value: editedItem.codigo,
                         },
                         {

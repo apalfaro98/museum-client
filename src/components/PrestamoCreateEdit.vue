@@ -90,7 +90,7 @@
                                     color="primary"
                                     @click="$refs.menu.save(date)"
                                 >
-                                    OK
+                                    Aceptar
                                 </v-btn>
                             </v-date-picker>
                         </v-menu>
@@ -109,7 +109,7 @@
             <v-btn color="blue darken-1" text @click="$emit('close')">
                 Cancelar
             </v-btn>
-            <v-btn color="blue darken-1" text @click="save"> Salvar </v-btn>
+            <v-btn color="blue darken-1" text @click="save"> Guardar </v-btn>
         </v-card-actions>
     </v-card>
 </template>

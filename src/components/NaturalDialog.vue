@@ -14,7 +14,7 @@
                             value: editedItem.propietario,
                         },
                         {
-                            title: 'CODIGO',
+                            title: 'CÓDIGO',
                             value: editedItem.codigo,
                         },
                         {
@@ -72,7 +72,7 @@
                     ]"
                 />
                 <list-element
-                    :title="'IDENTIFICADOR TECNICO'"
+                    :title="'IDENTIFICADOR TÉCNICO'"
                     :list="[
                         {
                             title: 'FECHA',

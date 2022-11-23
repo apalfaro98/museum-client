@@ -65,7 +65,7 @@ export default {
                     value: 'propietario',
                 },
                 {
-                    text: 'CODIGO',
+                    text: 'CÓDIGO',
                     value: 'codigo',
                 },
                 {

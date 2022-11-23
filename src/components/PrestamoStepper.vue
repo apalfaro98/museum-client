@@ -20,7 +20,7 @@
 
                 <v-divider></v-divider>
 
-                <v-stepper-step step="4"> Datos Prestamo </v-stepper-step>
+                <v-stepper-step step="4"> Datos Préstamo </v-stepper-step>
             </v-stepper-header>
 
             <v-stepper-items>

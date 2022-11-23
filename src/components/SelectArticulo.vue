@@ -12,7 +12,7 @@
             <v-btn color="blue darken-1" text @click="$emit('close')">
                 Cancelar
             </v-btn>
-            <v-btn color="blue darken-1" text @click="save"> Salvar </v-btn>
+            <v-btn color="blue darken-1" text @click="save"> Guardar </v-btn>
         </v-card-actions>
     </div>
 </template>

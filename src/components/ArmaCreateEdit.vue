@@ -29,7 +29,7 @@
                         ></v-text-field>
                         <v-text-field
                             v-model="editedItem.codigo"
-                            label="CODIGO"
+                            label="CÓDIGO"
                             outlined
                             :disabled="!isNew"
                         ></v-text-field>
@@ -203,9 +203,9 @@
         <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="blue darken-1" text @click="$emit('close')">
-                Cancel
+                Cancelar
             </v-btn>
-            <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
+            <v-btn color="blue darken-1" text @click="save"> Guardar </v-btn>
         </v-card-actions>
     </v-card>
 </template>
@@ -240,11 +240,11 @@ export default {
         },
         save() {
             if (this.editedItem.codigo === '') {
-                this.error = 'El codigo es obligatorio.';
+                this.error = 'El código es obligatorio.';
                 return;
             }
             if (this.editedItem.noInventario === '') {
-                this.error = 'El numero de Inventario es obligatorio.';
+                this.error = 'El número de Inventario es obligatorio.';
                 return;
             }
             if (this.editedItem.cantidad === '') {
@@ -280,7 +280,7 @@ export default {
                 return;
             }
             if (this.editedItem.ubicacion === '') {
-                this.error = 'La ubicacion es obligatoria.';
+                this.error = 'La ubicación es obligatoria.';
                 return;
             }
             if (this.editedItem.estado === '') {

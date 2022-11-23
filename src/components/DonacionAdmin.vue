@@ -10,7 +10,7 @@
                 v-if="success"
                 @click="success = false"
                 class="alert"
-                >Donacion realizada exitosamente.</v-alert
+                >Donación realizada exitosamente.</v-alert
             >
         </v-scroll-x-reverse-transition>
         <v-data-table
@@ -59,7 +59,7 @@
                                 v-bind="attrs"
                                 v-on="on"
                             >
-                                Nueva Donacion
+                                Nueva Donación
                             </v-btn>
                         </template>
                         <donacion-stepper
@@ -98,7 +98,7 @@ export default {
             { text: 'MUSEO', value: 'museo' },
             { text: 'FECHA', value: 'fecha' },
             { text: 'DONANTE', value: 'donante' },
-            { text: 'DIRECCION', value: 'direccion' },
+            { text: 'DIRECCIÓN', value: 'direccion' },
             { text: 'RECIBIDO POR', value: 'recibe' },
             {
                 text: 'ARTICULO DONADO',

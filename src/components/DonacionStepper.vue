@@ -14,7 +14,7 @@
 
                 <v-divider></v-divider>
 
-                <v-stepper-step step="3"> Datos Donacion </v-stepper-step>
+                <v-stepper-step step="3"> Datos Donación </v-stepper-step>
             </v-stepper-header>
 
             <v-stepper-items>

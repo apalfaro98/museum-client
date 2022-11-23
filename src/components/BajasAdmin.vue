@@ -61,7 +61,7 @@ export default {
             { text: 'FECHA ENTRADA', value: 'registroEntrada' },
             { text: 'GRADO DE VALOR', value: 'gradoDeValor' },
             { text: 'ESTADO', value: 'estado' },
-            { text: 'SECCION', value: 'section' },
+            { text: 'SECCIÓN', value: 'section' },
             {
                 text: 'ARTICULO TRANSFERIDO',
                 value: 'actions',

@@ -90,12 +90,12 @@ export default {
         selectedSection: -1,
         items: [
             {
-                text: 'Estadistica',
+                text: 'Estadística',
                 icon: 'mdi-chart-line',
                 route: '/admin/estadistica',
             },
             {
-                text: 'Prestamos',
+                text: 'Préstamos',
                 icon: 'mdi-hand-coin',
                 route: '/admin/prestamos',
             },

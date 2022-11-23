@@ -39,7 +39,7 @@
                     <v-col cols="12" sm="6">
                         <v-text-field
                             v-model="editedItem.direccion"
-                            label="DIRECCION"
+                            label="DIRECCIÓN"
                             outlined
                         ></v-text-field>
                         <v-text-field
@@ -57,7 +57,7 @@
             <v-btn color="blue darken-1" text @click="$emit('close')">
                 Cancelar
             </v-btn>
-            <v-btn color="blue darken-1" text @click="save"> Salvar </v-btn>
+            <v-btn color="blue darken-1" text @click="save"> Guardar </v-btn>
         </v-card-actions>
     </v-card>
 </template>
@@ -97,7 +97,7 @@ export default {
             }
             if (this.editedItem.direccion === '') {
                 this.error =
-                    'La direccion de la persona que dona es obligatoria.';
+                    'La dirección de la persona que dona es obligatoria.';
                 return;
             }
             if (this.editedItem.recibe === '') {

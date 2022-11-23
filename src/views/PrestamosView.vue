@@ -51,7 +51,7 @@ export default {
             editedItem: {},
             articulo: {},
             headers: [
-                { text: 'MUSEO', value: 'museo' },
+                { text: 'MÚSEO', value: 'museo' },
                 { text: 'CANTIDAD', value: 'cantidad' },
                 { text: 'FECHA ENTREGA', value: 'fechaPrestamo' },
                 { text: 'FECHA DEVOLUCIÓN', value: 'fechaDevolucion' },
@@ -59,7 +59,7 @@ export default {
                 { text: 'ORGANISMO', value: 'organismo' },
                 { text: 'ENTREGADO POR', value: 'entregadoPor' },
                 {
-                    text: 'ARTICULO PRESTADO',
+                    text: 'ARTÍCULO PRESTADO',
                     value: 'actions',
                     sortable: false,
                     align: 'center',
